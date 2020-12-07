@@ -29,4 +29,5 @@ Go to “main” section in the end of this file, in “input parameter” subse
 4) Change camera angles
 
 ![](/GeneratedImages4.jpg)
+![](/GeneratedImages2.jpg)
 
