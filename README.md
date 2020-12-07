@@ -7,7 +7,7 @@
 
 #What needed:  Folder of HDRI and a folder  of pbr materials (Example folders are available in this script folder as: HDRI_BackGround, PBRMaterials
 
-# What to do: 
+# How to use: 
 Go to “main” section in the end of this file, in “input parameter” subsection
 1) set Path to OutFolder where generated images should be saved
 2) Set Path HDRI_BackGroundFolder which contain background HDRI (for start use the example HDRI_BackGround, supplied in this script folder)
