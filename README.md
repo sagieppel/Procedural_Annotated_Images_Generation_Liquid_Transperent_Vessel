@@ -28,5 +28,5 @@ Go to “main” section in the end of this file, in “input parameter” subse
 3) Add background objects and light source
 4) Change camera angles
 
-![](/Figure1.png)
+![](/GeneratedImages4.jpg)
 
