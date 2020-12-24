@@ -25,10 +25,15 @@ Go to “main” section in the end of this file, in “input parameter” subse
 # Running without Simulating liquids
 For running the script withou generating and simulating liquids delete the following lines in the main section.
  CreateDomainCube(name="LiquidDomain",scale=(MaxXY*2, MaxXY*2, MaxZ*2)) 
+ 
  AssignMaterialToLiquid("LiquidDomain") 
+ 
  TurnToLiquid("Content") 
+ 
  TurnToEffector("Vessel") 
+ 
  TurnToDoman ...
+ 
 # ToDo:
 1) Depth maps
 2) Increase variability of materials add: smoke, suspension, powder, multiphase..
