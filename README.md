@@ -22,6 +22,13 @@ Go to “main” section in the end of this file, in “input parameter” subse
 5) If you want to run script as stand alone without blender file or supporting Hdri and Pbr folders, go to main and disable all the "assign material" functions and also the "set background" function
 6) This was run on ubuntu 20 with blender 2.91 (still crashes sometimes probably due memory problems)
 
+# Running without Simulating liquids
+For running the script withou generating and simulating liquids delete the following lines in the main section.
+ CreateDomainCube(name="LiquidDomain",scale=(MaxXY*2, MaxXY*2, MaxZ*2)) 
+ AssignMaterialToLiquid("LiquidDomain") 
+ TurnToLiquid("Content") 
+ TurnToEffector("Vessel") 
+ TurnToDoman ...
 # ToDo:
 1) Depth maps
 2) Increase variability of materials add: smoke, suspension, powder, multiphase..
