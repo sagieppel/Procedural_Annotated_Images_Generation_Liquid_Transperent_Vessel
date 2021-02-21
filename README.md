@@ -33,6 +33,13 @@ For running the script withou generating and simulating liquids delete the follo
  TurnToEffector("Vessel") 
  
  TurnToDoman ...
+
+# Running without producing Depth and Surface Normals
+To prevent outputting EXR files for Depth and Surface Normals, simply set the `depth_normal_render` parameter in the `RenderImageAndSave(...)` method to False
+
+For example: 
+`RenderImageAndSave(FileNamePrefix,FramesToRender,OutputFolder,depth_normal_render = False)`
+
  
 # ToDo:
 1) Depth maps
