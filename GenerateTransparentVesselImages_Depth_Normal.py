@@ -614,158 +614,110 @@ def ChangeCamera(name="Camera", lens = 32, location=(0,0,0),rotation=(0, 0, 0)):
 #                 Render image and save to file
 
 ###########################################################################################
-def RenderImageAndSave(FileNamePrefix,FramesToRender,OutputFolder):
+def RenderImageAndSave(FileNamePrefix,FramesToRender,OutputFolder,depth_normal_render = True):
     if not os.path.exists(OutputFolder): os.mkdir(OutputFolder)
     else: print("Warning output folder: "+ OutputFolder+ " Already exists")
     #================set render  need to be done once======================================
   #  bpy.ops.object.select_all(action="DESELECT")
-    '''
-    # Changed
-    
-    # Set up rendering of depth map:
-    bpy.context.scene.use_nodes = True
-    tree = bpy.context.scene.node_tree
-    links = tree.links
-
-    # clear default nodes
-    for n in tree.nodes:
-        tree.nodes.remove(n)
-
-    # create input render layer node
-    rl = tree.nodes.new('CompositorNodeRLayers')
-
-    map = tree.nodes.new(type="CompositorNodeMapValue")
-    # Size is chosen kind of arbitrarily, try out until you're satisfied with resulting depth map.
-    map.size = [0.08]
-    map.use_min = True
-    map.min = [0]
-    map.use_max = True
-    map.max = [255]
-    links.new(rl.outputs[2], map.inputs[0])
-
-    invert = tree.nodes.new(type="CompositorNodeInvert")
-    links.new(map.outputs[0], invert.inputs[1])
-
-    # The viewer can come in handy for inspecting the results in the GUI
-    depthViewer = tree.nodes.new(type="CompositorNodeViewer")
-    links.new(invert.outputs[0], depthViewer.inputs[0])
-    # Use alpha from input.
-    links.new(rl.outputs[1], depthViewer.inputs[1])
-
-    # Save file output
-    # create a file output node and set the path
-    fileOutput = tree.nodes.new(type="CompositorNodeOutputFile")
-    fileOutput.base_path = "/my_path/"
-    links.new(invert.outputs[0], fileOutput.inputs[0])
-      
-    '''
-    
-    #================Construct Surface Normal and Depth Maps in EXR format======================================
-    bpy.context.scene.use_nodes = True
-    tree = bpy.context.scene.node_tree
-    links = tree.links
- 
-    # clear default nodes
-    for n in tree.nodes:
-        tree.nodes.remove(n)
-    
-    #render=bpy.context.scene.render
-    scene = bpy.context.scene
-    scene.render.use_multiview = True
-    #scene.render.views_format = 'STEREO_3D'
-    r1 = tree.nodes.new(type="CompositorNodeRLayers")
-    composite = tree.nodes.new(type = "CompositorNodeComposite")
-    composite.location = 200,0
-    
-    depth_file_output = tree.nodes.new(type="CompositorNodeOutputFile")
-    normal_file_output = tree.nodes.new(type="CompositorNodeOutputFile")
-    #image_file_output = self.tree.nodes.new(type="CompositorNodeOutputFile")
-    
-    
-    
-    scene = bpy.context.scene
-    
-    # Add passes for computing surface normals
-    scene.view_layers['View Layer'].use_pass_normal = True
-    scene.render.image_settings.color_depth = '16'
-    
-    
-    scene.render.image_settings.file_format = 'OPEN_EXR'
-    
-    
-    #scene.render.image_settings.file_format = 'OPEN_EXR'
-    #scene.render.image_settings.color_depth = '32'
-    
-    
-    
-    
-    
-    # Setup depthmap calculation using blender's mist function
-    scene.view_layers["View Layer"].use_pass_mist = True
-    #scene.render.layers['RenderLayer'].use_pass_mist = True
-
-    #the depthmap can be calculated as the distance between objects and camera ('LINEAR'), or square/inverse square of the distance ('QUADRATIC'/'INVERSEQUADRATIC'):
-    scene.world.mist_settings.falloff = 'LINEAR'
-    #minimum depth:
-    scene.world.mist_settings.intensity = 0.0
-    #maximum depth (can be changed depending on the scene geometry to normalize the depth map whatever the camera orientation and position is):
-    
-    
-    
-    dist = ((bpy.context.scene.camera.location[0]-(-3.22))**(2)+(bpy.context.scene.camera.location[1]-(8.0))**(2)+(bpy.context.scene.camera.location[2]-(-5.425))**(2))**(1/2)
-    #print('the dist is!!!!!!!!!!!!!!!!!!!!!!!!!!!!',dist)
-    scene.world.mist_settings.depth = dist
-    
-    #==================go over Selected frames========================================================
-    for k in FramesToRender:
+    if depth_normal_render:
+        #================Construct Surface Normal and Depth Maps in EXR format======================================
+        bpy.context.scene.use_nodes = True
+        tree = bpy.context.scene.node_tree
+        links = tree.links
+     
+        # clear default nodes
+        for n in tree.nodes:
+            tree.nodes.remove(n)
         
-        bpy.context.scene.frame_set(k)
-        
-        
-        #============Render Mist Image=============================================================
-        links.new(r1.outputs['Mist'],composite.inputs['Image'])
-        scene.render.use_multiview = False
-        scene.render.filepath = OutputFolder+"/"+'mist_'+FileNamePrefix+"_Frame_"+str(k)+".jpg"
-        bpy.ops.render.render(write_still=True)
-        
-        #============Render image=============================================================
-        #bpy.ops.import_scene.obj(filepath="C:/Users/Sagi/Documents/BlenderObjects/IronMan/IronMan.obj")
-        links.new(r1.outputs['Image'],composite.inputs['Image'])
+        # Initialize scene
+        scene = bpy.context.scene
         scene.render.use_multiview = True
         
-        scene.render.filepath=OutputFolder+"/"+FileNamePrefix+"_Frame_"+str(k)+".jpg"
-        # render scene
-        bpy.ops.render.render(write_still=True)
+        # Add nodes for Depth and Normal
+        r1 = tree.nodes.new(type="CompositorNodeRLayers")
+        composite = tree.nodes.new(type = "CompositorNodeComposite")
+        composite.location = 200,0
         
-        #============Render Normal Image=============================================================
-        links.new(r1.outputs['Normal'], composite.inputs['Image'])
-        #scene.render.use_multiview = False
-        scene.render.filepath=OutputFolder+"/"+'normal_'+FileNamePrefix+"_Frame_"+str(k)+".jpg"
-        bpy.ops.render.render(write_still=True)
+        # Initialize scene
+        scene = bpy.context.scene
         
+        # Add passes for computing surface normals
+        scene.view_layers['View Layer'].use_pass_normal = True
+        scene.render.image_settings.color_depth = '16'
         
-        #============Render Depth EXR Image=============================================================
-        '''
-        for output_node in [depth_file_output, normal_file_output]:
-            output_node.base_path = ''
+        # Set the file format for rendering images to be EXR
+        scene.render.image_settings.file_format = 'OPEN_EXR'
+        
+        # Setup depthmap calculation using blender's mist function
+        scene.view_layers["View Layer"].use_pass_mist = True
+
+        # The depthmap can be calculated as the distance between objects and camera ('LINEAR'), or square/inverse square of the distance ('QUADRATIC'/'INVERSEQUADRATIC'):
+        scene.world.mist_settings.falloff = 'LINEAR'
+        
+        # Minimum depth with mist
+        scene.world.mist_settings.intensity = 0.0
+        # Maximum depth (can be changed depending on the scene geometry to normalize the depth map whatever the camera orientation and position is):
+        dist = ((bpy.context.scene.camera.location[0]-(-3.22))**(2)+(bpy.context.scene.camera.location[1]-(8.0))**(2)+(bpy.context.scene.camera.location[2]-(-5.425))**(2))**(1/2)
+        scene.world.mist_settings.depth = dist
+        
+        #==================Iterate through Selected Frames========================================================
+        for k in FramesToRender:
             
-        depth_file_output.format.file_format = "OPEN_EXR"
-        '''
-        links.new(r1.outputs['Depth'],composite.inputs['Image'])
-        scene.render.use_multiview = False
-        scene.render.filepath = OutputFolder+"/"+'EXR_depth_'+FileNamePrefix+"_Frame_"+str(k)+".exr"
-        bpy.ops.render.render(write_still=True)
-        
-        #============Render Normal EXR=============================================================
-        normal_file_output.format.file_format = "OPEN_EXR"
-        
-        links.new(r1.outputs['Normal'], composite.inputs['Image'])
-        
-        #scene.render.use_multiview = False
-        scene.render.filepath=OutputFolder+"/"+'EXR_normal_'+FileNamePrefix+"_Frame_"+str(k)+".exr"
-        bpy.ops.render.render(write_still=True)
-        
-        print(scene.render.filepath+" Saved")
+            bpy.context.scene.frame_set(k)
+            
+            
+            #============Render Mist Image=============================================================
+            links.new(r1.outputs['Mist'],composite.inputs['Image'])
+            scene.render.use_multiview = False
+            scene.render.filepath = OutputFolder+"/"+'mist_'+FileNamePrefix+"_Frame_"+str(k)+".jpg"
+            # render scene
+            bpy.ops.render.render(write_still=True)
+            
+            #============Render RGB Image=============================================================
+            #bpy.ops.import_scene.obj(filepath="C:/Users/Sagi/Documents/BlenderObjects/IronMan/IronMan.obj")
+            links.new(r1.outputs['Image'],composite.inputs['Image'])
+            scene.render.use_multiview = True
+            scene.render.filepath=OutputFolder+"/"+FileNamePrefix+"_Frame_"+str(k)+".jpg"
+            # render scene
+            bpy.ops.render.render(write_still=True)
+            
+            #============Render Normal Image=============================================================
+            links.new(r1.outputs['Normal'], composite.inputs['Image'])
+            #scene.render.use_multiview = False
+            scene.render.filepath=OutputFolder+"/"+'normal_'+FileNamePrefix+"_Frame_"+str(k)+".jpg"
+            # render scene
+            bpy.ops.render.render(write_still=True)
+            
+            
+            #============Render Depth EXR Image=============================================================
+            links.new(r1.outputs['Depth'],composite.inputs['Image'])
+            scene.render.use_multiview = False
+            scene.render.filepath = OutputFolder+"/"+'EXR_depth_'+FileNamePrefix+"_Frame_"+str(k)+".exr"
+            bpy.ops.render.render(write_still=True)
+            
+            #============Render Normal EXR=============================================================
+            #normal_file_output.format.file_format = "OPEN_EXR"
+            
+            links.new(r1.outputs['Normal'], composite.inputs['Image'])
+            
+            #scene.render.use_multiview = False
+            scene.render.filepath=OutputFolder+"/"+'EXR_normal_'+FileNamePrefix+"_Frame_"+str(k)+".exr"
+            bpy.ops.render.render(write_still=True)
+            
+            print(scene.render.filepath+" Saved")
+            
+    elif not(depth_normal_render):
+        render=bpy.context.scene.render
+        #==================go over Selected frames========================================================
+        for k in FramesToRender:
+            bpy.context.scene.frame_set(k)
+            #============Render image=============================================================
+            #bpy.ops.import_scene.obj(filepath="C:/Users/Sagi/Documents/BlenderObjects/IronMan/IronMan.obj")
+            render.filepath=OutputFolder+"/"+FileNamePrefix+"_Frame_"+str(k)+".jpg"
+            # render scene
+            bpy.ops.render.render(write_still=True)
+            print(render.filepath+" Saved")
+
         
 
 
