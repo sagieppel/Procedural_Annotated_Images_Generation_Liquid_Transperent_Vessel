@@ -41,7 +41,7 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 
 
 # Sources for objects/HDRI/PBR materials
-1) Objects were taken from [Shapenet CORE](https://shapenet.org/). Blender has some issue with reading the dataset directly, so it was converted to GTLF format using the ConvertShapeNet.py script supplied.
+1) Objects were taken from [Shapenet](https://shapenet.org/). Blender has some issue with reading the  shapenet .obj filesdirectly, so it was converted to GTLF format using the ConvertShapeNet.py script supplied. See [https://github.com/CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf)
 2) HDRI backgrounds were downloaded from [HdriHaven](https://hdrihaven.com/)
 3) PBR materials textures were downloaded from [cc0textures](https://cc0textures.com/)
 
