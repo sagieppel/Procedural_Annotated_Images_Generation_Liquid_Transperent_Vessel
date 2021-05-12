@@ -22,8 +22,9 @@ Objects Folder, HDRI background folder, and a folder of PBR materials (Example f
 Images should start appearing in the OutFolder after few minutes (depending on the rendering file). 
 Note that while running, Blender will be paralyzed.
 
-# Additional parameters ( in the “Input parameters” section of the main (line 1423))
-NumSimulationsToRun determines how many different environments to render into images (How many different images will be created).
+# Additional parameters 
+(in the “Input parameters” of "Main" python script (line 1423))
+"NumSimulationsToRun" determines how many different environments to render into images (How many different images will be created).
 There are two generation modes one mode will create liquid inside the vessel, and the other will put random objects inside the vessel. The ratio between the two is controlled by the parameter: "LiquidContentFractionOfCases". Setting this to zero means that only vessels with objects inside them will be generated. Setting this to 1 means that only vessels with liquids inside them will be generated.
 
 
