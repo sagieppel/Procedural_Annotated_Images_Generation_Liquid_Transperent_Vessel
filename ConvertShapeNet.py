@@ -1,10 +1,11 @@
-# Convert shapenetCore objects to gtlf in one folder
+# Convert shapenet objects to gtlf in one folder
 # Using https://github.com/CesiumGS/obj2gltf
 # (Most be installed before)
-# Shapenet: https://shapenet.org/
+# Shapenet: https://shapenet.org/ 
+
 import os
-MainDir=r"/home/chemargos/Downloads/ShapeNetCore.v2//"
-OutDir=r"/home/chemargos/Documents/ObjectGTLF//"
+MainDir=r"/home/chemargos/Downloads/ShapeNetCore.v2//" # input original shapenet
+OutDir=r"/home/chemargos/Documents/ObjectGTLF//" # Output gtlf
 if not os.path.exists(OutDir): os.mkdir(OutDir)
 NumFile=0
 for path, subdirs, files in os.walk(MainDir):
