@@ -13,7 +13,7 @@ The best place to start is in the “Main” section in the last part of this sc
 Objects Folder, HDRI background folder, and a folder of PBR materials (Example folders are supplied as: “HDRI_BackGround”, “PBRMaterials”, and “Objects”)
 
 # How to use:
-1) Go to the “Main” section of the python script (Line 1420) section at the end of this file, in the “input parameter” subsection.
+1) Go to the “Main” section of the python script  (at the end of the script), in the “input parameter” subsection.
 2) In the "OutFolder" parameter set path to where the generated images should be saved.
 3) Set Path HDRI_BackGroundFolder," parameter set path to where the background HDRI (for a start, use the example HDRI_BackGround, supplied)
 4) In the "PBRMaterialsFolder" parameter set path to where the PBR materials (for a start, use the example PBRMaterials folder supplied)
@@ -23,9 +23,12 @@ Images should start appearing in the OutFolder after few minutes (depending on t
 Note that while running, Blender will be paralyzed.
 
 # Additional parameters 
-(in the “Input parameters” of "Main" python script (line 1423))
+(in the “Input parameters” of "Main" python script (last section of the script)
 "NumSimulationsToRun" determines how many different environments to render into images (How many different images will be created).
+
 There are two generation modes one mode will create liquid inside the vessel, and the other will put random objects inside the vessel. The ratio between the two is controlled by the parameter: "LiquidContentFractionOfCases". Setting this to zero means that only vessels with objects inside them will be generated. Setting this to 1 means that only vessels with liquids inside them will be generated.
+
+SaveObjects parameter: Determine if to save the vessel object and its context as  a 3d model gtlf file. These can be a little big.
 
 
 
