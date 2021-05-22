@@ -1456,7 +1456,9 @@ def ExportObjectAsGTLF(ObjectName,FileName,Frame=0):
     bpy.ops.object.select_all(action="DESELECT")
     bpy.data.objects[ObjectName].select_set(True)
     bpy.context.view_layer.objects.active = bpy.data.objects[ObjectName] 
-    bpy.ops.export_scene.gltf(export_format='GLTF_EMBEDDED',filepath=FileName, export_selected=True, export_apply=True)
+    # bpy.ops.export_scene.gltf(export_format='GLTF_EMBEDDED',filepath=FileName, use_selection =True, export_apply=True,export_current_frame=True)
+    bpy.ops.export_scene.gltf(export_format='GLB',filepath=FileName, use_selection =True, export_apply=True,export_current_frame=True)
+    #https://docs.blender.org/api/current/bpy.ops.export_scene.html
     bpy.context.scene.frame_set(0)
 
 
