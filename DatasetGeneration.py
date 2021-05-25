@@ -233,13 +233,13 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
     
     #-----------Strech deform of vessel out of cylindrical----------------------------------------------------------------------------------- 
     stx=sty=1   
-    if np.random.rand()<0.04:
+    if np.random.rand()<0.035:
         if np.random.rand()<0.5:
              stx=np.random.rand()*0.8+0.2
         else: 
              sty=np.random.rand()*0.8+0.2
     #----------------------Content size this is the initial shape/mesh of the liquid inside the vessel------------------------------------------------------------
-    if np.random.rand()<0.69:
+    if np.random.rand()<0.68:
         MatX_RadRatio=1-(np.random.rand()**1.3)*0.9
         MatY_RadRatio=1-(np.random.rand()**1.3)*0.9 # Ratio of the material radius compare to 
     else:
