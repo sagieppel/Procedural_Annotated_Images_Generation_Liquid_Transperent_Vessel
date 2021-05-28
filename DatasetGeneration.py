@@ -1248,9 +1248,9 @@ def LoadNObjectsInsideVessel(ObjectList,R,MinZ,MaxZ,NumObjects):
        RadScale=R/4+np.random.rand()*R*3/4
        xyz=[0,0,0]
        dst=0
-       xyz[2]=MinZ+np.random.rand()*((MaxZ-MinZ)-RadScale/2)  #MinZ+np.random.rand()*(MaxZ-MinZ)-RadScale/2
-       xyz[1]=0#(R-RadScale)*np.random.rand()-(R-RadScale)
-       xyz[0]=0#(R-RadScale)*np.random.rand()-(R-RadScale)
+       xyz[2] = MinZ+np.random.rand()*((MaxZ-MinZ)-RadScale/2)  #MinZ+np.random.rand()*(MaxZ-MinZ)-RadScale/2
+       xyz[1] = (R-RadScale)*np.random.rand()-(R-RadScale)/2
+       xyz[0] = (R-RadScale)*np.random.rand()-(R-RadScale)/2
        ContentNames.append(LoadRandomObject(ObjectList,RadScale,xyz))
        
        
