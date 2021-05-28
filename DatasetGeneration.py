@@ -324,16 +324,16 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
              Matfaces.append(face) 
     #    #print(k)
     #------------Vessel floor as single face-------------------------------------------        
-    if np.random.rand()<0.85:
-        face = (0,)
-        faceTop=(VesselFloorHeight*Vnum,) # face of top floor
-        for k in range(1,Vnum):
-            face += (k,)
-            faceTop += (k+VesselFloorHeight*Vnum,)
-        if VesselFloorHeight>0: faces.append(faceTop) 
-        faces.append(face) 
-        Matfaces.append(face)
-        Openfaces.append(face)
+    #######if np.random.rand()<0.85:
+    face = (0,)
+    faceTop=(VesselFloorHeight*Vnum,) # face of top floor
+    for k in range(1,Vnum):
+        face += (k,)
+        faceTop += (k+VesselFloorHeight*Vnum,)
+    if VesselFloorHeight>0: faces.append(faceTop) 
+    faces.append(face) 
+    Matfaces.append(face)
+    Openfaces.append(face)
         
     #------------content top as as a single single face-------------------------------------------        
     face = (len(Matverts)-Vnum-1,)
