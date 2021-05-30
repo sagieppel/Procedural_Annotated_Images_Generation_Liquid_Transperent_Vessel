@@ -1249,8 +1249,8 @@ def LoadNObjectsInsideVessel(ObjectList,R,MinZ,MaxZ,NumObjects):
        xyz=[0,0,0]
        dst=0
        xyz[2] = MinZ+np.random.rand()*((MaxZ-MinZ)-RadScale/2)  #MinZ+np.random.rand()*(MaxZ-MinZ)-RadScale/2
-       xyz[1] = (R-RadScale)*np.random.rand()-(R-RadScale)/2
-       xyz[0] = (R-RadScale)*np.random.rand()-(R-RadScale)/2
+       xyz[1]=2*(R-RadScale)*np.random.rand()-(R-RadScale)
+       xyz[0]=2*(R-RadScale)*np.random.rand()-(R-RadScale)
        ContentNames.append(LoadRandomObject(ObjectList,RadScale,xyz))
        
        
@@ -1587,7 +1587,7 @@ for cnt in range(1000000000000000000):
             ContentMode="Objects"
       
 
-            ContentNames=LoadNObjectsInsideVessel(ObjectList,MaxXY-VesselWallThikness,MinZ,MaxZ,NumObjects=np.random.randint(10)) # Put random objects in vessel
+            ContentNames=LoadNObjectsInsideVessel(ObjectList,MaxXY-VesselWallThikness,MinZ,MaxZ,NumObjects=np.random.randint(np.random.randint(8)+1)) # Put random objects in vessel
          
             if  np.random.rand()<0.5:
                 if np.random.rand()<0.8:
