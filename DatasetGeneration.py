@@ -1265,6 +1265,7 @@ def LoadNObjectsInsideVessel(ObjectList,R,MinZ,MaxZ,NumObjects):
 ##############################################################################################################################   
 def CameraParamtersToDictionary():
    # https://mcarletti.github.io/articles/blenderintrinsicparams/
+   #https://www.rojtberg.net/1601/from-blender-to-opencv-camera-and-back/
     dic={}
     dic['name']=bpy.context.object.name #= name    
     dic['Focal Length']=bpy.context.object.data.lens #= lens
@@ -1280,6 +1281,7 @@ def CameraParamtersToDictionary():
     dic['resolution_x']=bpy.context.scene.render.resolution_x 
     dic['pixel_aspect_x']=bpy.context.scene.render.pixel_aspect_x
     dic['pixel_aspect_y']=bpy.context.scene.render.pixel_aspect_y  
+    dic['resolution_percentage']=bpy.context.scene.render.resolution_percentage
     dic['scale']=bpy.context.object.scale[:]
 
     return dic
