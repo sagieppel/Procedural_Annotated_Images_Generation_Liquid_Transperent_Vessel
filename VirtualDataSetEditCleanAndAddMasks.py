@@ -1,22 +1,23 @@
 
-#---------------------------------------Finalized dataset------------------------------------------------------------------
+#---------------------------------------Finalized dataset add segmentation masks ------------------------------------------------------------------
 import cv2
 import numpy as np
 import os
 import shutil
 
-
-MainDir= r"C:\Users\Sagi\Downloads\SamplesGenerated\\"
-
-
-
+#----------------------Input parameters--------------------------------------------------------------------------
+#input folder where the generated dataset is
+MainDir= r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/OutObjectSupportedGTB_OpeningFixed_NONECentarFullCameraParamters//"
 
 #------------------Remove incomplete---------------------------------------------------------------
+count=0
 for InDir in os.listdir(MainDir):
     InDir = MainDir + "//" + InDir
     if os.path.isdir(InDir) and not os.path.exists(InDir + "//Finished.txt"):
             shutil.rmtree(InDir)
-#----------------------------------------------------------------------------------------------
+            count+=1
+print("Remove ", count, 'incomplete folders ')
+#--------------------------------Create masks and additional data--------------------------------------------------------------
 for InDir in os.listdir(MainDir):
     InDir= MainDir+"//"+InDir
     if os.path.isdir(InDir) and os.path.exists(InDir+"//Finished.txt"):
