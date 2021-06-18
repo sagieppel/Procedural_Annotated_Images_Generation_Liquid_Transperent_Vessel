@@ -1510,7 +1510,7 @@ NumSimulationsToRun=1              # Number of simulation to run
 
 SaveObjects=True # Do you want to save vessel and content as objects, some of these filese can  be large
 #==============Liquid simulation parameters==============================================================
-SurfaceDisance=0.7 # Increase to avoid leaks
+SurfaceDisance=0.45 # Increase to avoid leaks
 MaxSubDivisionResolution=65
 MinSubDivisionResolution=64
 
