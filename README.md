@@ -28,7 +28,7 @@ However, if you want to create truely diverse images you need large number of ba
 Images should start appearing in the OutFolder after few minutes (depending on the rendering file). 
 Note that while running, Blender will be paralyzed, and will not respond.
 
-7. Once done, open the "VirtualDataSetEditCleanAndAddMasks.py" script, in the "MainDir" parameter set the path to the data you just generated (the OutFolder from 2). This will add segmentation masks to the dataset.
+7. Once done, open the "VirtualDataSetEditCleanAndAddMasks.py" script. In the "MainDir" parameter set the path to the data folder you just generated (the OutFolder from 2). Run the script. This will add segmentation masks to the dataset.
 
 # Additional parameters 
 In the “Input parameters” of "Main" DatasetGeneration  script (last section of the script)
