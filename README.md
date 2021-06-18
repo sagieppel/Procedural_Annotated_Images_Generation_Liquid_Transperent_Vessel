@@ -4,7 +4,7 @@
 Images, Depth maps, Normal maps, and material properties will be saved to the output folder. Images of the vessel content without vessel and vessel without content will also be saved. 
 
 
-### This was run with Blender 2.92 with no additional add-ons
+### This was run with Blender 2.93 with no additional add-ons
 
 ## Where to start: 
 The best place to start is in the “Main” section in the last part of this script.
