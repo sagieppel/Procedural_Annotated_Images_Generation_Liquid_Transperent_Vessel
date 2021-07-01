@@ -129,9 +129,9 @@ def CreateRadiusArray(MinH,MaxH,MinR,MaxR):
         MaterialInitHeight=int(np.random.rand()*(MaterialTopHeight-1))
         if MaterialTopHeight>h: MaterialTopHeight=h
         if MaterialTopHeight<3: MaterialTopHeight=3
-        if MaterialInitHeight<MaterialTopHeight: MaterialInitHeight = MaterialTopHeight - 2
-        if MaterialInitHeight>MaterialTopHeight: MaterialInitHeight= MaterialTopHeight-1
-        if MaterialInitHeight==MaterialTopHeight: MaterialInitHeight= MaterialTopHeight-1
+     
+        if MaterialInitHeight>=MaterialTopHeight: MaterialInitHeight= MaterialTopHeight-1
+       
      
     #------------------------------------------------------------------
         r=np.random.rand()*50+4 # Radius of the vessel at start
@@ -1510,7 +1510,7 @@ NumSimulationsToRun=1              # Number of simulation to run
 
 SaveObjects=True # Do you want to save vessel and content as objects, some of these filese can  be large
 #==============Liquid simulation parameters==============================================================
-SurfaceDisance=0.45 # Will also create buffer layer between vessel and wall that will reduce realisim, but will reduce leaks of liquids trough vessel surface  
+SurfaceDisance=0.39 # Will also create buffer layer between vessel and wall that will reduce realisim, but will reduce leaks of liquids trough vessel surface  
 MaxSubDivisionResolution=65
 MinSubDivisionResolution=64
 
