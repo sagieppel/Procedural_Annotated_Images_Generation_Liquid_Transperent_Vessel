@@ -240,11 +240,11 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
              sty=np.random.rand()*0.8+0.2
     #----------------------Content size this is the initial shape/mesh of the liquid inside the vessel------------------------------------------------------------
     if np.random.rand()<0.68 and SimpleLiquid==False:  
-        MatX_RadRatio=1-(np.random.rand()**1.3)*0.9 # this will create small liqui blob that will squash inside the vessel
-        MatY_RadRatio=1-(np.random.rand()**1.3)*0.9 # Ratio of the material radius compare to 
+        MatX_RadRatio=1-(np.random.rand()**1.3) # this will create small liqui blob that will squash inside the vessel
+        MatY_RadRatio=1-(np.random.rand()**1.3) # Ratio of the material radius compare to 
     else:
-        MatX_RadRatio=0.98
-        MatY_RadRatio=0.98 # Ratio of the material radius compare to \
+        MatX_RadRatio=1
+        MatY_RadRatio=1 # Ratio of the material radius compare to \
         MaterialInitHeight = VesselFloorHeight+1
     if np.random.rand()<0.1:
          MaterialInitHeight = VesselFloorHeight+1
@@ -290,7 +290,7 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
          #   print(x)
             vert = (x,y,z)  # Add Vertex
             verts.append(vert) # Add to vessel vertexes
-            Mvert = (x* MatX_RadRatio,y* MatY_RadRatio,z)  # 
+            Mvert = (x* MatX_RadRatio-VesselWallThikness* math.cos(theta),y* MatY_RadRatio-VesselWallThikness* math.sin(theta),z)  # 
             if fz<=MaterialTopHeight and fz>=MaterialInitHeight: # Material/content inside vessel
                   Matverts.append(Mvert)
             if fz==len(rl)-1: # opening of vessel
@@ -336,9 +336,10 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
     Openfaces.append(face)
         
     #------------content top as as a single single face-------------------------------------------        
-    face = (len(Matverts)-Vnum-1,)
-    for k in range(len(Matverts)-Vnum,len(Matverts)):
+    face = (len(Matverts)-Vnum,)
+    for k in range(len(Matverts)-Vnum+1,len(Matverts)):
         face += (k,)
+  
     Matfaces.append(face) 
 #***************************************************************************
                 
@@ -1506,6 +1507,7 @@ ObjectFolder=r"Objects/"  #Folder of objects that will be used for background
 OutFolder=r"OutPut/"# Where output images will be saved
 
 
+
 #HDRI_BackGroundFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/4k_HDRI/4k/" # Background dri folder
 #PBRMaterialsFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/2K_PBR/"
 #ObjectFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/ObjectGTLF/" #Folder of objects that will be used for background 
@@ -1514,11 +1516,13 @@ OutFolder=r"OutPut/"# Where output images will be saved
 
 
 
-LiquidContentFractionOfCases=0.3 # Fraction of images that will be generated with liquid simulation inside the vessel, the rest will be created with objects inside the vessel
-NumSimulationsToRun=1              # Number of simulation to run
-SimpleLiquid=True# This will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
 
-SaveObjects=False # Do you want to save vessel and content as objects, some of these filese can  be large
+
+LiquidContentFractionOfCases=0.3 # Fraction of images that will be generated with liquid simulation inside the vessel, the rest will be created with objects inside the vessel
+NumSimulationsToRun=100000000000              # Number of simulation to run
+SimpleLiquid=False# This will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
+
+SaveObjects=True # Do you want to save vessel and content as objects, some of these filese can  be large
 #==============Liquid simulation parameters==============================================================
 SurfaceDisance=0.39 # Will also create buffer layer between vessel and wall that will reduce realisim, but will reduce leaks of liquids trough vessel surface  
 MaxSubDivisionResolution=65
