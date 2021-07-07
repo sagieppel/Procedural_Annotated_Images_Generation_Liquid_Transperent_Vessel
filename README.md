@@ -36,6 +36,9 @@ In the “Input parameters” of "Main" DatasetGeneration  script (last section 
 
 There are two generation modes one mode will create liquid inside the vessel, and the other will put random objects inside the vessel. The ratio between the two is controlled by the parameter: "LiquidContentFractionOfCases". Setting this to zero means that only vessels with objects inside them will be generated. Setting this to 1 means that only vessels with liquids inside them will be generated.
 
+Another content generation mode can be applied by setting SimpleLiquid=True in the parameters; this will make the content of the vessel, to be a mesh that fills the lower part of the vessel and have a completely flat upper surface. Kind of like a simple static liquid with no surface tension. No liquid simulation will be performed in this case. Note that setting SimpleLiquid=True will make this as the only content type that will be generated (no objects or simulated liquids will be put inside the vessel in this case).
+
+
 SaveObjects parameter: Determine if to save the vessel object and its context as  a 3d model gtlf file. These can be a little big.
 
 
