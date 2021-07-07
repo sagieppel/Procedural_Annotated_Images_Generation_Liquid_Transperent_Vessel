@@ -27,7 +27,7 @@
 #(in the “Input parameters” of "Main" python script  (near the end of this file)
 #"NumSimulationsToRun" determines how many different environments to render into images (How many different images will be created).
 #There are two generation modes one mode will create liquid inside the vessel, and the other will put random objects inside the vessel. The ratio between the two is controlled by the parameter: "LiquidContentFractionOfCases". Setting this to zero means that only vessels with objects inside them will be generated. Setting this to 1 means that only vessels with liquids inside them will be generated.
-
+#Another content generation mode can be applied by setting SimpleLiquid=True in the parameters; this will make the content of the vessel, to be a mesh that fills the lower part of the vessel and have a completely flat upper surface. Kind of like a simple static liquid with no surface tension. No liquid simulation will be performed in this case.
 
 ###############################Dependcies######################################################################################3
 
@@ -122,19 +122,19 @@ def CreateSlope(slope0):
 ##################################################################################################################
 def CreateRadiusArray(MinH,MaxH,MinR,MaxR): 
         print("========================Creating Radius Array=====================================================")
-        h=np.random.randint(MaxH-MinH)+MinH # Height of vessel (number of layers
+        VesselHeight=np.random.randint(MaxH-MinH)+MinH # Height of vessel (number of layers
         
-        MaterialTopHeight=int((np.random.rand()*(h-1))+2)
+        MaterialTopHeight=int((np.random.rand()*(VesselHeight-1))+2) # Height og thec content material inside the vessel
         
         MaterialInitHeight=int(np.random.rand()*(MaterialTopHeight-1))
-        if MaterialTopHeight>h: MaterialTopHeight=h
+        if MaterialTopHeight>VesselHeight: MaterialTopHeight=VesselHeight
         if MaterialTopHeight<3: MaterialTopHeight=3
      
         if MaterialInitHeight>=MaterialTopHeight: MaterialInitHeight= MaterialTopHeight-1
        
      
     #------------------------------------------------------------------
-        r=np.random.rand()*50+4 # Radius of the vessel at start
+        r=np.random.rand()*50+8 # Radius of the vessel at start
         r0=r
         rl=[r]# array of radiuses in each layer of  the vessel
 #        dslop=np.random.rand()*0.4-0.2 # diffrential of slope
@@ -148,7 +148,7 @@ def CreateRadiusArray(MinH,MaxH,MinR,MaxR):
         slope,a,b,y,Mode,Rad,Drad=CreateSlope(0)
         dslop=0
         swp=np.random.rand()*3 # Probability for replacement
-        for i in range(h): # go layer by layer and change vessel raius
+        for i in range(VesselHeight): # go layer by layer and change vessel raius
             while(True):  
                  if Mode=="Linear":
                      dslop=a+b*y
@@ -172,7 +172,7 @@ def CreateRadiusArray(MinH,MaxH,MinR,MaxR):
                  if (r+slope)<MinR and dslop<0:
                         slope,a,b,y,Mode,Rad,Drad=CreateSlope(slope)
                         continue
-                 if np.random.rand()<swp/h:
+                 if np.random.rand()<swp/VesselHeight:
                      slope,a,b,y,Mode,Rad,Drad=CreateSlope(slope)
                      print("SwitcH")
                      print(Mode)
@@ -185,13 +185,13 @@ def CreateRadiusArray(MinH,MaxH,MinR,MaxR):
            #print("h="+str(h))
            #print("MaterialInitHeight="+str(MaterialInitHeight))
            #print("MaterialTopHeight="+str(MaterialTopHeight))
-        return rl, MaterialTopHeight, MaterialInitHeight,h   
+        return rl, MaterialTopHeight, MaterialInitHeight,VesselHeight   
 ##################################################################################################################333
 
 #                          Create vessel Object 
 
 ####################################################################################################################
-def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,MinR=4,MaxR=40,ScaleFactor=0.1):   
+def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,MinR=4,MaxR=40,ScaleFactor=0.1,SimpleLiquid=True):   
     print("=================Create Vessel Mesh object and add to scene==================================")     
     #--------------------Create random shape Material assign parameters----------------------------------------- 
     if np.random.rand()<0.5: 
@@ -239,12 +239,12 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
         else: 
              sty=np.random.rand()*0.8+0.2
     #----------------------Content size this is the initial shape/mesh of the liquid inside the vessel------------------------------------------------------------
-    if np.random.rand()<0.68:
-        MatX_RadRatio=1-(np.random.rand()**1.3)*0.9
+    if np.random.rand()<0.68 and SimpleLiquid==False:  
+        MatX_RadRatio=1-(np.random.rand()**1.3)*0.9 # this will create small liqui blob that will squash inside the vessel
         MatY_RadRatio=1-(np.random.rand()**1.3)*0.9 # Ratio of the material radius compare to 
     else:
-        MatX_RadRatio=0.97
-        MatY_RadRatio=0.97 # Ratio of the material radius compare to \
+        MatX_RadRatio=0.98
+        MatY_RadRatio=0.98 # Ratio of the material radius compare to \
         MaterialInitHeight = VesselFloorHeight+1
     if np.random.rand()<0.1:
          MaterialInitHeight = VesselFloorHeight+1
@@ -1505,10 +1505,20 @@ PBRMaterialsFolder=r"PBRMaterials/"#PBR materials folder
 ObjectFolder=r"Objects/"  #Folder of objects that will be used for background 
 OutFolder=r"OutPut/"# Where output images will be saved
 
+
+#HDRI_BackGroundFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/4k_HDRI/4k/" # Background dri folder
+#PBRMaterialsFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/2K_PBR/"
+#ObjectFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/ObjectGTLF/" #Folder of objects that will be used for background 
+#OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/LiquidFlatSurface/"# Where output images will be saved
+
+
+
+
 LiquidContentFractionOfCases=0.3 # Fraction of images that will be generated with liquid simulation inside the vessel, the rest will be created with objects inside the vessel
 NumSimulationsToRun=1              # Number of simulation to run
+SimpleLiquid=True# This will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
 
-SaveObjects=True # Do you want to save vessel and content as objects, some of these filese can  be large
+SaveObjects=False # Do you want to save vessel and content as objects, some of these filese can  be large
 #==============Liquid simulation parameters==============================================================
 SurfaceDisance=0.39 # Will also create buffer layer between vessel and wall that will reduce realisim, but will reduce leaks of liquids trough vessel surface  
 MaxSubDivisionResolution=65
@@ -1572,7 +1582,7 @@ for cnt in range(1000000000000000000):
     CleanScene()  # Delete all objects in scence
   
 #    #------------------------------Create random vessel object and assign  material to it---------------------------------
-    MaxXY,MaxZ,MinZ,VesselWallThikness=AddVessel("Vessel","Content",ScaleFactor=1)#np.random.rand()+0.1) # Create Vessel object named "Vessel" and add to scene also create mesh inside the vessel ("Content) which will be transformed to liquid
+    MaxXY,MaxZ,MinZ,VesselWallThikness=AddVessel("Vessel","Content",ScaleFactor=1, SimpleLiquid=SimpleLiquid) # Create Vessel object named "Vessel" and add to scene also create mesh inside the vessel ("Content) which will be transformed to liquid
     VesselMaterial=AssignMaterialToVessel("Vessel") # assign random material to vessel object
 
    #-------------------------------------------Create ground plane and assign materials to it----------------------------------
@@ -1592,8 +1602,17 @@ for cnt in range(1000000000000000000):
     LoadNObjectsToScene(ObjectList,AvoidPos=[0,0,0],AvoidRad=MaxXY,NumObjects=np.random.randint(11),MnPos=[-PlaneSx,-PlaneSy,-5],MxPos=[PlaneSx,PlaneSy,0],MnScale=(np.random.rand()*0.8+0.2)*MaxXY,MxScale=np.max([MaxXY,MaxZ])*(1+np.random.rand()*4))    
 
 ##################################Create vessel content could be a liquid or object##########################################
+   
+    if SimpleLiquid==True: # mesh that fill the bottum part of the vessel with flat surface, kind of a liquid in a glass, no liquid simulation will be performed
+           if np.random.rand()<0.35:
+              ContentMaterial=AssignMaterialBSDFtoObject(ObjectName="Content", MaterialName="BSDFMaterialLiquid")  # assign material to liquid
+           else: 
+              ContentMaterial=AssignTransparentMaterial(ObjectName="Content", MaterialName="TransparentLiquidMaterial") #Assign material for the object domain (basically the material of the liquid)
+           ContentMode="FlatLiquid"
+           ContentNames=["Content"] # names of all meshes/objects inside vessels
+           FramesToRender=[0]  # Frames in the animation to render
 #------------------Put random objects in the vessel-----------------------------------------------------------------
-    if np.random.rand()<1-LiquidContentFractionOfCases:
+    elif np.random.rand()<1-LiquidContentFractionOfCases:
             ContentMode="Objects"
       
 
@@ -1601,17 +1620,18 @@ for cnt in range(1000000000000000000):
          
             if  np.random.rand()<0.5:
                 if np.random.rand()<0.8:
-                     for nm in ContentNames:
+                     for nm in ContentNames: # names of all meshes/objects inside vessels
                            print(nm)
                            ContentMaterial=AssignMaterialBSDFtoObject(ObjectName=nm, MaterialName="BSDFMaterialLiquid")  # Assign single bsdf material to all object in the vessel
                 else: 
                      for nm in ContentNames: 
                            ContentMaterial=AssignTransparentMaterial(ObjectName=nm, MaterialName="TransparentLiquidMaterial") # assign transparent material to all object in the vesssel
-            FramesToRender=[0] 
+            FramesToRender=[0] # Frames in the animation to render
+            
   
-#..............................Create scene with liquid in vessels.....................................................
+#..............................Create scene with liquid in vessels actually simulate liwuiud.....................................................
     else:
-        ContentNames=["LiquidDomain"]
+        ContentNames=["LiquidDomain"] # names of all meshes/objects inside vessels
         CreateDomainCube(name="LiquidDomain",scale=(MaxXY*2, MaxXY*2, MaxZ)) # Create Cube that will act as liquid domain
         if np.random.rand()<0.5:
               ContentMaterial=AssignMaterialBSDFtoObject(ObjectName="LiquidDomain", MaterialName="BSDFMaterialLiquid")  # assign material to liquid
@@ -1622,7 +1642,7 @@ for cnt in range(1000000000000000000):
         TurnToEffector("Vessel",SurfaceDisance) # Turn Vessel into liquid effector (will interact with liquid as solid object)
         TurnToDoman("LiquidDomain",CatcheFolder=CatcheFolder,Bake=True,EndFrame=151,resolution=SubDivResolution,MaxTimeStep=TimeStep,MinTimeStep=MinTimeStep, Smooth=True) # Turn domain Cube into domain and bake simulation (Time consuming)
         FramesToRender=[30,65,100,150] # Liquid is dynamic so several frames will be rendered
-        ContentMode="Liquid"
+        ContentMode="Liquid" # Frames in the animation to render
     #break
 #-----------------Save materials properties as json files------------------------------------------------------------
     if not  os.path.exists(OutputFolder): os.mkdir(OutputFolder)
@@ -1635,7 +1655,7 @@ for cnt in range(1000000000000000000):
     with open(OutputFolder+'/VesselMaterial.json', 'w') as fp: json.dump(VesselMaterial, fp)
     
 #....................Delete uneeded parts---------------------------------------------------------------------
-    DeleteObject("Content") # Delete the liquid  object (The liquid that was generated in the simulation is attached to the LiquidDomain and will not be effected
+    if SimpleLiquid==False: DeleteObject("Content") # Delete the liquid  object (The liquid that was generated in the simulation is attached to the LiquidDomain and will not be effected, if you use simple liquid the Content is the liquid and will not be deleted
     HideObject("VesselOpenning",Hide=True)
     
     RandomlySetCameraPos(name="Camera",VesWidth = MaxXY,VesHeight = MaxZ)
