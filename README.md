@@ -34,12 +34,11 @@ Note that while running, Blender will be paralyzed, and will not respond.
 In the “Input parameters” of "Main" DatasetGeneration  script (last section of the script)
 "NumSimulationsToRun" determines how many different environments to render into images (How many different images will be created).
 
-There are two generation modes one mode will create liquid inside the vessel, and the other will put random objects inside the vessel. The ratio between the two is controlled by the parameter: "LiquidContentFractionOfCases". Setting this to zero means that only vessels with objects inside them will be generated. Setting this to 1 means that only vessels with liquids inside them will be generated.
+The "ContentMode" prameter  Will determine the type of content that will be generated insid the vessel, this parameter have three states: 
+1)"Liquid": liquid simulation inside the vessel (simulation can be time consuming)
+2)"Objects":   objects inside the vessel (objects will be taken from the Objects folder)
+3)"FlatLiquid": will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
 
-Another content generation mode can be applied by setting SimpleLiquid=True in the parameters; this will make the content of the vessel, to be a mesh that fills the lower part of the vessel and have a completely flat upper surface. Kind of like a simple static liquid with no surface tension. No liquid simulation will be performed in this case. Note that setting SimpleLiquid=True will make this as the only content type that will be generated (no objects or simulated liquids will be put inside the vessel in this case).
-
-
-SaveObjects parameter: Determine if to save the vessel object and its context as  a 3d model gtlf file. These can be a little big.
 
 
 
