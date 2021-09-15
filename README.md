@@ -1,5 +1,5 @@
 # Description:
- This script will procedurally generate images of randomly shaped transparent vessels with random objects or simulated liquid inside the vessel, in random procedurally generated enviroments. 
+ This script will procedurally generate images of randomly shaped transparent vessels with random objects or simulated liquid inside the vessel, in random procedurally generated enviroments. (Generating Script for the Transproteus Dataset)
 
 ## What this generate?
 
