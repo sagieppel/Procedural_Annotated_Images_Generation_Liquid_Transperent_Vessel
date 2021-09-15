@@ -57,9 +57,8 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 2) HDRI backgrounds were downloaded from [HdriHaven](https://hdrihaven.com/)
 3) PBR materials textures were downloaded from [cc0textures](https://cc0textures.com/)
 
+The dataset Created using this script can be download:[Full Dataset 1](https://e.pcloud.link/publink/show?code=kZfx55Zx1GOrl4aUwXDrifAHUPSt7QUAIfV),  [Full DataSet Link2](https://icedrive.net/1/6cZbP5dkNG), [Subset](https://zenodo.org/record/5508261#.YUGsd3tE1H4)
 
 ![](/Figure1.jpg)
-![](/GeneratedImages2.jpg)
-
-The dataset Created using this script can be download:[Full Dataset 1](https://e.pcloud.link/publink/show?code=kZfx55Zx1GOrl4aUwXDrifAHUPSt7QUAIfV),  [Full DataSet Link2](https://icedrive.net/1/6cZbP5dkNG), [Subset](https://zenodo.org/record/5508261#.YUGsd3tE1H4)
+![](/VesselWithContent_Frame_0_RGB.jpg)
 
