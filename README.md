@@ -49,7 +49,6 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 1) Try to avoid relative paths; Blender is not very good with those.
 2) Running this script should paralyze Blender until the script is done, which can take a while.
 3) The script refers to materials nodes and will only run as part of the blender file
-4) The script is documented with comments: contact me: sagieppel@gmail.com for any questions
 
 
 # Sources for objects/HDRI/PBR materials
