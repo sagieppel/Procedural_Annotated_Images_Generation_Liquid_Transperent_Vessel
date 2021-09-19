@@ -1,8 +1,11 @@
 # Procedurally Generate CGI images of materials, objects, and liquids in transparent Vessels with mask segmentation, 3D models, depth maps and properties:
  This script will procedurally generate images of randomly shaped transparent vessels with random objects or simulated liquid inside the vessel, in random procedurally generated enviroments. (Generating Script for the Transproteus Dataset).
-2D, Segmentation masks, 3D depth and normal maps, 3D models and material properties will be also generated.
+
+2D Segmentation masks, 3D depth and normal maps, 3D models and material properties will be also generated.
+
 For more details see: [Predicting 3D shapes, masks, and properties of materials, liquids, and
 objects inside transparent containers, using the TransProteus CGI dataset](https://arxiv.org/pdf/2109.07577.pdf)
+
 ![](/Figure1.jpg)
 
 ## What this generate?
