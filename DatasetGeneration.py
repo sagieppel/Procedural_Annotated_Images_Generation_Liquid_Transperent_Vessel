@@ -1348,8 +1348,8 @@ def RandomlySetCameraPos(name,VesWidth,VesHeight):
      roty=(0.5*np.random.rand()-0.5*np.random.rand())*np.random.rand()
     
      Focal=50 #(np.random.rand()*5+2)*R/np.max([VesWidth,VesHeight])
-     shift_x=0.2-np.random.rand()*0.4
-     shift_y=0.2-np.random.rand()*0.4
+     shift_x=0#0.2-np.random.rand()*0.4
+     shift_y=0#0.2-np.random.rand()*0.4
      SetCamera(name="Camera", lens = Focal, location=(x,y,z),rotation=(rotx, roty, rotz),shift_x=shift_x,shift_y=shift_y)
 ##################################################################################################
 
