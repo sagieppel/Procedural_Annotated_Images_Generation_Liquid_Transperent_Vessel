@@ -814,7 +814,7 @@ def AssignMaterialToVessel(name):
     bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[12].default_value = 0 # Sheen 
     bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[13].default_value = 0.5 # Sheen tint
     bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (0, 0, 0, 1) # Emission
-     bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0 # Emission stength
+    bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0 # Emission stength
 
 
     return BSDFMaterialToDictionary(bpy.data.materials["Glass"]) # turn material propeties into dictionary (for saving)
@@ -866,7 +866,7 @@ def AssignMaterialBSDFtoObject(ObjectName, MaterialName):
       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[6].default_value =0# metalic
     else:
        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[6].default_value =1# metalic
-     if np.random.rand()<0.12: # specular
+    if np.random.rand()<0.12: # specular
        bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value = np.random.rand()# specular
     elif np.random.rand()<0.6:
       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value =0.5# specular
@@ -1518,7 +1518,7 @@ def ExportObjectAsBlend(ObjectName,FileName,Frame=0):
 HDRI_BackGroundFolder=r"HDRI_BackGround/" # Background Hdri folder
 PBRMaterialsFolder=r"PBRMaterials/"#PBR materials folder
 ObjectFolder=r"Objects/"  #Folder of objects that will be used for background 
-OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/FlatLiquid/"# Where output images will be saved
+OutFolder=r"Output/"# Where output images will be saved
 
 
 
@@ -1536,7 +1536,7 @@ OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/FlatLiq
 
 NumSimulationsToRun=100000000000              # Number of simulation to run
 
-ContentMode= "FlatLiquid" # "Objects" # Type of content that will be generated insid the vessel 
+ContentMode= "FlatLiquid" # "Objects","Liquid" # Type of content that will be generated insid the vessel 
 # "Liquid": liquid simulation inside the vessel
 # "Objects":   objects inside the vessel
 #"FlatLiquid": will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
