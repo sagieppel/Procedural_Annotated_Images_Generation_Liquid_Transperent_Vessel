@@ -23,7 +23,7 @@ Note that the script refer to nodes in the blend file and can only be run with t
 ## What needed:  
 Objects Folder, HDRI background folder, and a folder of PBR materials (Example folders are supplied as: “HDRI_BackGround”, “PBRMaterials”, and “Objects”).
 However, if you want to create truely diverse images you need large number of backgrounds, objects, and PBR materials. This can be download for free at:
-[PolyHaven](https://polyhaven.com/), [ambientcg](https://ambientcg.com/), [Shapenet](https://shapenet.org/)
+[PolyHaven](https://polyhaven.com/), [AmbientCg](https://ambientcg.com/), [Shapenet](https://shapenet.org/)
 
 # How to use:
 1) Go to the “Main” section of the DatasetGeneration.py script  (at the end of the script), in the “input parameter” subsection.
@@ -60,8 +60,8 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 
 # Sources for objects/HDRI/PBR materials
 1) Objects were taken from [Shapenet](https://shapenet.org/). Blender has some issue with reading the  shapenet ".obj" files directly, so it was converted to GTLF format using the ConvertShapeNet.py script supplied. See [https://github.com/CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf)
-2) HDRI backgrounds were downloaded from [HdriHaven](https://hdrihaven.com/)
-3) PBR materials textures were downloaded from [ambientcg](https://ambientcg.com/) and [FreePBR](https://freepbr.com/)
+2) HDRI backgrounds were downloaded from [PolyHaven](https://polyhaven.com/)
+3) PBR materials textures were downloaded from [AmbientCg](https://ambientcg.com/) and [FreePBR](https://freepbr.com/)
 
 The dataset Created using this script can be download:[Full Dataset 1](https://e.pcloud.link/publink/show?code=kZfx55Zx1GOrl4aUwXDrifAHUPSt7QUAIfV),  [Full DataSet Link2](https://icedrive.net/1/6cZbP5dkNG), [Subset](https://zenodo.org/record/5508261#.YUGsd3tE1H4)
 
