@@ -14,7 +14,7 @@ Procedurally generated images of transparent vessels containing liquid and objec
 
 
 
-### This was run with Blender 2.93 with no additional add-ons
+### This was run with Blender 3.00 with no additional add-ons
 
 ## Where to start: 
 The best place to start is in the “Main” section in the last part of the DatasetGeneration script.
