@@ -236,7 +236,7 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
     
     #-----------Strech deform of vessel out of cylindrical----------------------------------------------------------------------------------- 
     stx=sty=1   
-    if np.random.rand()<0.035:
+    if np.random.rand()<0.12:
         if np.random.rand()<0.5:
              stx=np.random.rand()*0.8+0.2
         else: 
@@ -661,22 +661,22 @@ def BSDFMaterialToDictionary(Mtr):
     dic["Subsurface"]=bsdf.inputs[1].default_value## = 0
     dic["Subsurface Radius"]=str(bsdf.inputs[2].default_value[:])
     dic["Subsurface Color"]=bsdf.inputs[3].default_value[:]# = (0.8, 0.642313, 0.521388, 1)
-    dic["Metalic"]=bsdf.inputs[4].default_value# = 5
-    dic["Specular"]=bsdf.inputs[5].default_value# = 0.804545
-    dic["Specular Tint"]=bsdf.inputs[6].default_value# = 0.268182
-    dic["Roughness"]=bsdf.inputs[7].default_value# = 0.64
-    dic["Anisotropic"]=bsdf.inputs[8].default_value# = 0.15
-    dic["Anisotropic Rotation"]=bsdf.inputs[9].default_value# = 0.236364
-    dic["Sheen"]=bsdf.inputs[10].default_value# = 0.304545
-    dic["Sheen tint"]=bsdf.inputs[11].default_value# = 0.304545
-    dic["Clear Coat"]=bsdf.inputs[12].default_value# = 0.0136364
-    dic["Clear Coat Roguhness"]=bsdf.inputs[13].default_value #= 0.0136364
-    dic["IOR"]=bsdf.inputs[14].default_value# = 3.85
-    dic["Transmission"]=bsdf.inputs[15].default_value# = 0.486364
-    dic["Transmission Roguhness"]=bsdf.inputs[16].default_value# = 0.177273
-    dic["Emission"]=bsdf.inputs[17].default_value[:]# = (0.170604, 0.150816, 0.220022, 1)
-    dic["Emission Strengh"]=bsdf.inputs[18].default_value
-    dic["Alpha"]=bsdf.inputs[19].default_value
+    dic["Metalic"]=bsdf.inputs[6].default_value# = 5
+    dic["Specular"]=bsdf.inputs[7].default_value# = 0.804545
+    dic["Specular Tint"]=bsdf.inputs[8].default_value# = 0.268182
+    dic["Roughness"]=bsdf.inputs[9].default_value# = 0.64
+    dic["Anisotropic"]=bsdf.inputs[10].default_value# = 0.15
+    dic["Anisotropic Rotation"]=bsdf.inputs[11].default_value# = 0.236364
+    dic["Sheen"]=bsdf.inputs[12].default_value# = 0.304545
+    dic["Sheen tint"]=bsdf.inputs[13].default_value# = 0.304545
+    dic["Clear Coat"]=bsdf.inputs[14].default_value# = 0.0136364
+    dic["Clear Coat Roguhness"]=bsdf.inputs[15].default_value #= 0.0136364
+    dic["IOR"]=bsdf.inputs[16].default_value# = 3.85
+    dic["Transmission"]=bsdf.inputs[17].default_value# = 0.486364
+    dic["Transmission Roguhness"]=bsdf.inputs[18].default_value# = 0.177273
+    dic["Emission"]=bsdf.inputs[19].default_value[:]# = (0.170604, 0.150816, 0.220022, 1)
+    dic["Emission Strengh"]=bsdf.inputs[20].default_value
+    dic["Alpha"]=bsdf.inputs[21].default_value
    # dic["bsdf Blender"]=bsdf.inputs
     return dic
 
@@ -743,81 +743,79 @@ def AssignMaterialToVessel(name):
     else:
         bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[1].default_value = 0
    
-   
     if np.random.rand()<0.15: #Transmission
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[15].default_value = 1-0.2*RandPow(3) # Transmission
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[17].default_value = 1-0.2*RandPow(3) # Transmission
     else:
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[15].default_value = 1 #Transmission
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[17].default_value = 1 #Transmission
        
        
     if np.random.rand()<0.2: # Roughnesss
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value = 0.2*RandPow(3) # Roughness
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[9].default_value = 0.2*RandPow(3) # Roughness
     else: 
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value = 0# Roughness
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[9].default_value = 0# Roughness
   
  
    
        
     if np.random.rand()<0.6:# ior index refraction
-         bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[14].default_value = 1.45+np.random.rand()*0.55 #ior index of reflection for transparen objects  
+         bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 1.45+np.random.rand()*0.55 #ior index of reflection for transparen objects  
     
     else:
-        bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[14].default_value = 1.415+np.random.rand()*0.115 #ior index of reflection for transparen objects  
+        bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 1.415+np.random.rand()*0.115 #ior index of reflection for transparen objects  
     #https://pixelandpoly.com/ior.html
 
-    if np.random.rand()<0.3:# transmission rouighness
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 0.22*RandPow(3) # transmission rouighness
-    else: 
-        bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 0 # transmission rouighness
-    
+     
 
     if np.random.rand()<0.12: # Metalic
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[4].default_value = 0.3*RandPow(3)# metalic
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[6].default_value = 0.3*RandPow(3)# metalic
     else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[4].default_value =0# meralic
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[6].default_value =0# meralic
       
       
     if np.random.rand()<0.12: # specular
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[5].default_value = np.random.rand()# specular
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value = np.random.rand()# specular
     elif np.random.rand()<0.6:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[5].default_value =0.5# specular
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value =0.5# specular
     else:
-      ior=bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[14].default_value# specular
+      ior=bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value# specular
       specular=((ior-1)/(ior+1))**2/0.08
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[5].default_value=specular
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value=specular
       
     if np.random.rand()<0.12: # specular tint
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[6].default_value = np.random.rand()# tint specular
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value = np.random.rand()# tint specular
     else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[6].default_value =0.0# specular tint
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value =0.0# specular tint
   
-    if np.random.rand()<0.12: # unisotropic
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value = np.random.rand()# unisotropic
+    if np.random.rand()<0.12: # anisotropic
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[10].default_value = np.random.rand()# unisotropic
     else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value =0.0# unisotropic
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[10].default_value =0.0# unisotropic
   
-    if np.random.rand()<0.12: # unisotropic
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[9].default_value = np.random.rand()# unisotropic rotation
+    if np.random.rand()<0.12: # anisotropic rotation
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[11].default_value = np.random.rand()# unisotropic rotation
     else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[9].default_value =0.0# unisotropic
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[11].default_value =0.0# unisotropic
     
-    if np.random.rand()<10.15:
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 0.25*RandPow(3) # transmission rouighness
-    else: 
-        bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 0 # transmission rouighness
+    if np.random.rand()<0.6: #Transmission Roughness
+         bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[18].default_value = 0.25*RandPow(3) # transmission rouighness
+    else:
+         bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[18].default_value = 0 # transmission rouighness
     
+      
+    if np.random.rand()<0.1: # Clear  coat
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[14].default_value = np.random.rand()
+    else:
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[14].default_value =0# 
 
     if np.random.rand()<0.1: # Clear  coat
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[12].default_value = np.random.rand()
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[15].default_value = np.random.rand()
     else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[12].default_value =0# 
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[15].default_value =0.03# 
+    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[12].default_value = 0 # Sheen 
+    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[13].default_value = 0.5 # Sheen tint
+    bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (0, 0, 0, 1) # Emission
+     bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0 # Emission stength
 
-    if np.random.rand()<0.1: # Clear  coat
-       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[13].default_value = np.random.rand()
-    else:
-      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[13].default_value =0.03# 
-    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[10].default_value = 0
-    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[11].default_value = 0.5
 
     return BSDFMaterialToDictionary(bpy.data.materials["Glass"]) # turn material propeties into dictionary (for saving)
 
@@ -850,60 +848,73 @@ def AssignMaterialBSDFtoObject(ObjectName, MaterialName):
 # ----------------------------------Select random property for material --------------------------------------------------------------------------------------      
       
     if np.random.rand()<0.9:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[15].default_value = np.random.rand() # Transmission
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[17].default_value = np.random.rand() # Transmission
     else:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[15].default_value = 1 #Transmission
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[17].default_value = 1 #Transmission
     if np.random.rand()<0.8:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[7].default_value = np.random.rand()*np.random.rand()# Roughness
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[9].default_value = np.random.rand()*np.random.rand()# Roughness
     else: 
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[7].default_value = 0# Roughness
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[9].default_value = 0# Roughness
 
     if np.random.rand()<0.9: # color
        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[0].default_value = (np.random.rand(), np.random.rand(),np.random.rand(), 1) # random color hsv
     else:
        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[0].default_value = (1, 1,1, 1) # white color
     if np.random.rand()<0.4:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[4].default_value = np.random.rand() # metalic
-    elif np.random.rand()<0.5:
-      bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[4].default_value =0# metalic
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[6].default_value = np.random.rand() # metalic
+    elif np.random.rand()<0.7:
+      bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[6].default_value =0# metalic
     else:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[4].default_value =1# metalic
-
-
-    if np.random.rand()<0.4:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[8].default_value = np.random.rand()# unisotropic
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[6].default_value =1# metalic
+     if np.random.rand()<0.12: # specular
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value = np.random.rand()# specular
+    elif np.random.rand()<0.6:
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value =0.5# specular
     else:
-        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[8].default_value = 0# unisotropic
+      ior=bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[16].default_value# specular
+      specular=((ior-1)/(ior+1))**2/0.08
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[7].default_value=specular
+      
+    if np.random.rand()<0.12: # specular tint
+       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value = np.random.rand()# tint specular
+    else:
+      bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[8].default_value =0.0# specular tint
+
     if np.random.rand()<0.4:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[9].default_value = np.random.rand()# unisotropic rotation
-    else: 
-        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[9].default_value = 0# unisotropic rotation
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[10].default_value = np.random.rand()# unisotropic
+    else:
+        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[10].default_value = 0# unisotropic
     if np.random.rand()<0.4:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[10].default_value = np.random.rand()# sheen
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[11].default_value = np.random.rand()# unisotropic rotation
     else: 
-        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[10].default_value = 0# sheen
+        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[11].default_value = 0# unisotropic rotation
     if np.random.rand()<0.4:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[11].default_value = np.random.rand()# sheen tint
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[12].default_value = np.random.rand()# sheen
     else: 
-        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[11].default_value = 0.5# sheen tint
-    
+        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[12].default_value = 0# sheen
+    if np.random.rand()<0.4:
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[13].default_value = np.random.rand()# sheen tint
+    else: 
+        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[13].default_value = 0.5# sheen tint
+    bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[14].default_value =0 #Clear Coat
+    bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[15].default_value = 0.03# Clear coat
  
   
-    bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[14].default_value = 1+np.random.rand()*2.5 #ior index of reflection for transparen objects  
+    bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 1+np.random.rand()*2.5 #ior index of reflection for transparen objects  
     #https://pixelandpoly.com/ior.html
     
     
     if np.random.rand()<0.2:
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[16].default_value = np.random.rand()**2*0.4# transmission rouighness
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[18].default_value = np.random.rand()**2*0.4# transmission rouighness
     else: 
-        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[16].default_value = 0 # transmission rouighness
+        bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[18].default_value = 0 # transmission rouighness
     
-    if np.random.rand()<0.015: # Emission
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[17].default_value = (np.random.rand(), np.random.rand(),np.random.rand(), 1)# Emission
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[18].default_value = (np.random.rand()**2)*100 # Transmission strengh
+    if np.random.rand()<0.02: # Emission
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (np.random.rand(), np.random.rand(),np.random.rand(), 1)# Emission
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[20].default_value = (np.random.rand()**2)*100 # emission strengh
     else: 
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[17].default_value = (0, 0,0, 1)## transmission rouighness
-       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[18].default_value = 1# Transmission strengh
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (0, 0,0, 1)## transmission rouighness
+       bpy.data.materials[MaterialName].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0# Transmission strengh
       
     bpy.context.object.active_material.use_screen_refraction = True
     return BSDFMaterialToDictionary(bpy.data.materials[MaterialName])
@@ -1507,14 +1518,14 @@ def ExportObjectAsBlend(ObjectName,FileName,Frame=0):
 HDRI_BackGroundFolder=r"HDRI_BackGround/" # Background Hdri folder
 PBRMaterialsFolder=r"PBRMaterials/"#PBR materials folder
 ObjectFolder=r"Objects/"  #Folder of objects that will be used for background 
-OutFolder=r"OutPut/"# Where output images will be saved
+OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/FlatLiquid/"# Where output images will be saved
 
 
 
 #HDRI_BackGroundFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/4k_HDRI/4k/" # Background dri folder
 #PBRMaterialsFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/2K_PBR/"
 #ObjectFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/ObjectGTLF/" #Folder of objects that will be used for background 
-#OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/LiquidFlatSurface/"# Where output images will be saved
+#OutFolder=r"/home/breakeroftime/Documents/Datasets/DataForVirtualDataSet/LiquidFlatSurface_Blender3/"# Where output images will be saved
 
 
 
@@ -1525,7 +1536,7 @@ OutFolder=r"OutPut/"# Where output images will be saved
 
 NumSimulationsToRun=100000000000              # Number of simulation to run
 
-ContentMode="Liquid"# "FlatLiquid" "Objects" # Type of content that will be generated insid the vessel 
+ContentMode= "FlatLiquid" # "Objects" # Type of content that will be generated insid the vessel 
 # "Liquid": liquid simulation inside the vessel
 # "Objects":   objects inside the vessel
 #"FlatLiquid": will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
@@ -1542,9 +1553,11 @@ MinTimeStep=4 # Avoid leaking and improve precision
 #==============Set Rendering engine parameters (for image creaion)==========================================
 
 bpy.context.scene.render.engine = 'CYCLES' # Use this configuration if you want to be able to see the content of the vessel (eve does not support content)
+#bpy.context.scene.cycles.device = 'GPU'
 #bpy.context.scene.cycles.feature_set = 'EXPERIMENTAL' # Not sure if this is really necessary but might help with sum surface textures
 bpy.context.scene.cycles.samples = 120 #200, #900 # This work well for rtx 3090 for weaker hardware this can take lots of time
 bpy.context.scene.cycles.preview_samples = 900 # This work well for rtx 3090 for weaker hardware this can take lots of time
+
 bpy.context.scene.render.resolution_x = 900
 bpy.context.scene.render.resolution_y = 900
 
@@ -1622,7 +1635,7 @@ for cnt in range(1000000000000000000):
               ContentMaterial=AssignTransparentMaterial(ObjectName="Content", MaterialName="TransparentLiquidMaterial") #Assign material for the object domain (basically the material of the liquid)
           
            ContentNames=["Content"] # names of all meshes/objects inside vessels
-           FramesToRender=[0]  # Frames in the animation to render
+           FramesToRender=[0]  # Frames in the animation to render 
 #------------------Put random objects in the vessel-----------------------------------------------------------------
     elif   ContentMode=="Objects":
        
