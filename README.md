@@ -23,7 +23,7 @@ Note that the script refer to nodes in the blend file and can only be run with t
 ## What needed:  
 Objects Folder, HDRI background folder, and a folder of PBR materials (Example folders are supplied as: “HDRI_BackGround”, “PBRMaterials”, and “Objects”).
 However, if you want to create truely diverse images you need large number of backgrounds, objects, and PBR materials. This can be download for free at:
-[HdriHaven](https://hdrihaven.com/), [cc0textures](https://cc0textures.com/), [Shapenet](https://shapenet.org/)
+[PolyHaven](https://polyhaven.com/), [ambientcg](https://ambientcg.com/), [Shapenet](https://shapenet.org/)
 
 # How to use:
 1) Go to the “Main” section of the DatasetGeneration.py script  (at the end of the script), in the “input parameter” subsection.
