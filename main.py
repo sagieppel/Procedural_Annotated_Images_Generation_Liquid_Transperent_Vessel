@@ -46,10 +46,10 @@ import random
 import json
 import sys
 filepath = bpy.data.filepath
-directory = os.path.dirname(filepath)
+homedir = os.path.dirname(filepath)
 #sys.path.append("/home/breakeroftime/Desktop/Simulations/ModularVesselContent")
-sys.path.append(directory)
-os.chdir(directory)
+sys.path.append(homedir)
+os.chdir(homedir)
 import VesselGeneration as VesselGen
 import LiquidSimulation as LiquidSim
 import MaterialsHandling as Materials
@@ -69,10 +69,10 @@ import SetScene
 # Example HDRI_BackGroundFolder and PBRMaterialsFolder  and ObjectsFolder folders should be in the same folder as the script. 
 # Recomand nto use absolute and not relative paths  as blender is not good with these
 
-HDRI_BackGroundFolder=r"HDRI_BackGround/" # Background Hdri folder
-PBRMaterialsFolder=r"PBRMaterials/"#PBR materials folder
-ObjectFolder=r"Objects/"  #Folder of objects that will be used for background 
-OutFolder=r"Output/"# Where output images will be saved
+HDRI_BackGroundFolder=homedir+r"/HDRI_BackGround/" # Background Hdri folder
+PBRMaterialsFolder=homedir+r"/PBRMaterials/"#PBR materials folder
+ObjectFolder=homedir+r"/Objects/"  #Folder of objects that will be used for background 
+OutFolder=homedir+r"/Output/"# Where output images will be saved
 
 
 
@@ -90,7 +90,7 @@ OutFolder=r"Output/"# Where output images will be saved
 
 NumSimulationsToRun=100000000000              # Number of simulation to run
 
-ContentMode= "Objects" # "Objects","Liquid" # Type of content that will be generated insid the vessel 
+ContentMode= "FlatLiquid" # "Objects","Liquid" # Type of content that will be generated insid the vessel 
 # "Liquid": liquid simulation inside the vessel
 # "Objects":   objects inside the vessel
 #"FlatLiquid": will create simple liquid with flat surface that fill the bottum of the vessel (no liquid simulation will be performed)
