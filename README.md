@@ -17,8 +17,8 @@ Procedurally generated images of transparent vessels containing liquid and objec
 ### This was run with Blender 3.00 with no additional add-ons
 
 ## Where to start: 
-The best place to start is in the “Main” section in the last part of the DatasetGeneration script.
-Note that the script refer to nodes in the blend file and can only be run with the DatasetGeneration.blend 
+The best place to start is in the main.py script.
+Note that the script refer to nodes in the .blend file and can only be run with the DatasetGeneration.blend 
 
 ## What needed:  
 Objects Folder, HDRI background folder, and a folder of PBR materials (Example folders are supplied as: “HDRI_BackGround”, “PBRMaterials”, and “Objects”).
@@ -26,7 +26,8 @@ However, if you want to create truely diverse images you need large number of ba
 [PolyHaven](https://polyhaven.com/), [AmbientCg](https://ambientcg.com/), [Shapenet](https://shapenet.org/)
 
 # How to use:
-1) Go to the “Main” section of the DatasetGeneration.py script  (at the end of the script), in the “input parameter” subsection.
+
+1) Go to the “Main” section of the main.py script, in the “input parameter” subsection.***
 2) In the "OutFolder" parameter set path to where the generated images should be saved.
 3) In the "HDRI_BackGroundFolder" parameter set path to where the background HDRI (for a start, use the example HDRI_BackGround, supplied)
 4) In the "PBRMaterialsFolder" parameter set path to where the PBR materials (for a start, use the example PBRMaterials folder supplied)
@@ -34,6 +35,7 @@ However, if you want to create truely diverse images you need large number of ba
 6) Run the script from Blender or run the script from the command line using: "blender DatasetGeneration.blend -b -P DatasetGeneration.py"
 Images should start appearing in the OutFolder after few minutes (depending on the rendering file). 
 Note that while running, Blender will be paralyzed, and will not respond.
+*** Note all paths are set to the example folder supplied, running Run.sh or the main.py from the blender file should allow the script to run out of the box
 
 7. Once done, open the "VirtualDataSetEditCleanAndAddMasks.py" script. In the "MainDir" parameter set the path to the data folder you just generated (the OutFolder from 2). Run the script. This will add segmentation masks to the dataset.
 
@@ -48,14 +50,13 @@ The "ContentMode" prameter  Will determine the type of content that will be gene
 
 
 # Creating the dataset
-Given Blender’s tendency to crash, running this script alone is problematic for large datasets creation. To avoid the need to restart the program every time Blender crashes, use the shell script RunGeneration.sh. This script will run the blender file in a loop, so it will restart every time Blender crashes. This can be run from shell/cmd/terminal: using: sh Run.sh 
+Given Blender’s tendency to crash, running this script alone is problematic for large datasets creation. To avoid the need to restart the program every time Blender crashes, use the shell script Run.sh. This script will run the blender file in a loop, so it will restart every time Blender crashes. This can be run from shell/cmd/terminal: using: sh Run.sh 
 
 
 
 # Notes:
-1) Try to avoid relative paths; Blender is not very good with those.
-2) Running this script should paralyze Blender until the script is done, which can take a while.
-3) The script refers to materials nodes and will only run as part of the blender file
+1) Running this script should paralyze Blender until the script is done, which can take a while.
+2) The script refers to materials nodes and will only run as part of the blender file
 
 
 # Sources for objects/HDRI/PBR materials
