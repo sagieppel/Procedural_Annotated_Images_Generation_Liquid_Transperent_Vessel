@@ -60,9 +60,11 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 
 
 # Sources for objects/HDRI/PBR materials
-1) Objects were taken from [Shapenet](https://shapenet.org/). Blender has some issue with reading the  shapenet ".obj" files directly, so it was converted to GTLF format using the ConvertShapeNet.py script supplied. See [https://github.com/CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf)
-2) HDRI backgrounds were downloaded from [PolyHaven](https://polyhaven.com/)
-3) PBR materials textures were downloaded from [AmbientCg](https://ambientcg.com/) and [FreePBR](https://freepbr.com/)
+1) Objects were taken from [Shapenet](https://shapenet.org/). Blender has some issue with reading the  shapenet ".obj" files directly, so it was converted to GTLF format using the AddionalFilteringScripts\ConvertShapeNet.py script supplied. See [https://github.com/CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf).
+Alternatively download the ShapeNet already converted to GTLF from [https://icedrive.net/0/a7ms6JJbX6](https://icedrive.net/0/a7ms6JJbX6)
+
+3) HDRI backgrounds were downloaded from [PolyHaven](https://polyhaven.com/)
+4) PBR materials textures were downloaded from [AmbientCg](https://ambientcg.com/) and [FreePBR](https://freepbr.com/)
 
 The dataset Created using this script can be download:[Full Dataset 1](https://e.pcloud.link/publink/show?code=kZfx55Zx1GOrl4aUwXDrifAHUPSt7QUAIfV),  [Full DataSet Link2](https://icedrive.net/1/6cZbP5dkNG), [Subset](https://zenodo.org/record/5508261#.YUGsd3tE1H4)
 
