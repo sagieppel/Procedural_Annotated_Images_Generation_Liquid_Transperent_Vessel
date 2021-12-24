@@ -185,7 +185,7 @@ def AddVessel(VesselName="Vessel",ContentName="MaterialContent",MinH=4,MaxH=80,M
     
     #-----------Strech deform of vessel out of cylindrical----------------------------------------------------------------------------------- 
     stx=sty=1   
-    if np.random.rand()<0.12:
+    if np.random.rand()<0.04:
         if np.random.rand()<0.5:
              stx=np.random.rand()*0.8+0.2
         else: 
