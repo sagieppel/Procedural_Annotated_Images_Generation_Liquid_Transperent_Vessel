@@ -57,6 +57,7 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 # Notes:
 1) Running this script should paralyze Blender until the script is done, which can take a while.
 2) The script refers to materials nodes and will only run as part of the blender file
+3) Blender 3 have lots of bugs/problems when working with codes which is distributed across different files, same code in a single file can be find in the folder [AddionalFilteringScripts/ScriptsAsSingleFile](https://github.com/sagieppel/Procedural_Annotated_Images_Generation_Liquid_Transperent_Vessel/tree/main/AddionalFilteringScripts/ScriptsAsSingleFile). 
 
 
 # Sources for objects/HDRI/PBR materials
