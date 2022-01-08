@@ -188,9 +188,9 @@ def AssignMaterialToVessel(name):
       bpy.data.materials['Glass'].node_tree.nodes["Principled BSDF"].inputs[15].default_value =0.03# 
     bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[12].default_value = 0 # Sheen 
     bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[13].default_value = 0.5 # Sheen tint
-    bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (0, 0, 0, 1) # Emission
-    bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0 # Emission stength
-    bpy.data.materials["BSDFMaterial"].node_tree.nodes["Principled BSDF"].inputs[21].default_value = 1 # alpha
+    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[19].default_value = (0, 0, 0, 1) # Emission
+    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[20].default_value = 0 # Emission stength
+    bpy.data.materials["Glass"].node_tree.nodes["Principled BSDF"].inputs[21].default_value = 0.7+np.random.rand()*0.3 # alpha
 
 
     return BSDFMaterialToDictionary(bpy.data.materials["Glass"]) # turn material propeties into dictionary (for saving)
