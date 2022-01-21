@@ -25,6 +25,7 @@ Objects Folder, HDRI background folder, and a folder of PBR materials (Example f
 However, if you want to create truely diverse images you need large number of backgrounds, objects, and PBR materials. This can be download for free at:
 [PolyHaven](https://polyhaven.com/), [AmbientCg](https://ambientcg.com/), [Shapenet](https://shapenet.org/)
 
+
 # How to use:
 
 1) Go to the “Main” section of the main.py script, in the “input parameter” subsection.***
@@ -58,7 +59,10 @@ Given Blender’s tendency to crash, running this script alone is problematic fo
 1) Running this script should paralyze Blender until the script is done, which can take a while.
 2) The script refers to materials nodes and will only run as part of the blender file
 3) Blender 3 have lots of bugs/problems when working with codes which is distributed across different files, same code in a single file can be find in the folder [AddionalFilteringScripts/ScriptsAsSingleFile](https://github.com/sagieppel/Procedural_Annotated_Images_Generation_Liquid_Transperent_Vessel/tree/main/AddionalFilteringScripts/ScriptsAsSingleFile). 
+[https://www.youtube.com/watch?v=s41ziLguxKk](https://www.youtube.com/watch?v=s41ziLguxKk)
 
+## Some example results on liquid
+[https://www.youtube.com/watch?v=voj72Jldhrs](https://www.youtube.com/watch?v=voj72Jldhrs)
 
 # Sources for objects/HDRI/PBR materials
 1) Objects were taken from [Shapenet](https://shapenet.org/). Blender has some issue with reading the  shapenet ".obj" files directly, so it was converted to GTLF format using the AddionalFilteringScripts\ConvertShapeNet.py script supplied. See [https://github.com/CesiumGS/obj2gltf](https://github.com/CesiumGS/obj2gltf).
