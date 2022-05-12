@@ -1,5 +1,9 @@
 # Convert shapenet objects to gtlf in one folder
 # Using https://github.com/CesiumGS/obj2gltf
+# (note you need to install node.js before)
+#npm install -g npm
+#nvm install 12.18.3 
+#npm install -g obj2gltf
 # (Most be installed before)
 # Shapenet: https://shapenet.org/ 
 
